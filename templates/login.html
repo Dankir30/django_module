@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="POST">
+    {%csrf_token%}
+    <div class="mb-3">
+        {{form}}
+    </div>
+    <input type="hidden" name="next" value="/" >
+    <input type="submit" class="btn btn-danger" value="Login">
+    <a href="{% url 'register' %}">Register</a>
+</form>
+{% endblock %}

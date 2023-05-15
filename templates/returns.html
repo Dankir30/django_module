@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div style="display: flex;
+  justify-content: center" class="mb-3">
+        <h3>RETURNS</h3>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product</th>
+            <th scope="col">Amount</th>
+            <th scope="col">User</th>
+            <th scope="col">Date</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for return in object_list %}
+            <tr>
+                <th scope="row">{{ return.id }}</th>
+                <td>{{ return.buy_item.product }}</td>
+                <td>{{ return.buy_item.amount }}</td>
+                <td>{{ return.buy_item.user.username }}</td>
+                <td>{{ return.request_time }}</td>
+                <td>
+                    <form method="post" action="{% url 'delete_return' return.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-danger" type="submit">Cancel</button>
+                    </form>
+                    <form method="post" action="{% url 'delete_buy_item' return.buy_item.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-success" type="submit">Approve</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
