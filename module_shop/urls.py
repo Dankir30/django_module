@@ -35,4 +35,5 @@ urlpatterns = [
     path('new_return/', BuyItemReturnCreateView.as_view(), name='new buyItem return'),
     path('delete_buy_item_return/<int:pk>', DeclineReturnView.as_view(), name='delete_return'),
     path('delete_buy_item/<int:pk>', ApproveReturnView.as_view(), name='delete_buy_item')
+    
 ]
