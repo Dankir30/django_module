@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="card mt-3">
+            <h5 class="card-title d-flex justify-content-center">{{ object.name }}</h5>
+            <div class="card-body">
+                <h4>{{ object.description }}</h4>
+                <h6> left: {{ object.balance }}</h6>
+                <h1>{{ object.price }}</h1>
+                <form method="POST" action="{% url 'new_buy_item' object.id %}">
+                    {% csrf_token %}
+                    {{ form.as_div }}
+                    <button class="btn btn-secondary" type="submit">Buy</button>
+                </form>
+                {% if request.user.is_superuser %}
+                 <a class="btn btn-primary mt-3" href="{% url 'edit' object.id %}">Edit</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
